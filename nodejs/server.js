@@ -1,5 +1,6 @@
-var http = require("http");
-var fs = require("fs");
+var http = require("http"),
+    fs = require("fs"),
+    ejs = require("ejs");
 
 http.createServer(function(req, res){
     res.writeHead(200, {"Content-Type" : "text/html"});
