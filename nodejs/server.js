@@ -2,9 +2,13 @@ var http = require("http"),
     fs = require("fs"),
     ejs = require("ejs");
 
-http.createServer(function(req, res){
-    res.writeHead(200, {"Content-Type" : "text/html"});
-    var output = fs.readFile("./index.ejs", "utf-8");
-    res.write(output);
+var server = http.createServer();
+var template = fs.readFileSync(__dirname + '/public_html/index.ejs', 'utf-8');
+server.on('request', function(req, res){
+    var data = ejs.render(template, {});
+    res.writeHead(200, {'Content-Type' : 'text/html'});
+    res.write(data);
     res.end();
-}).listen(1337);
+});
+server.listen(1337);
+console.log("server listening...");
